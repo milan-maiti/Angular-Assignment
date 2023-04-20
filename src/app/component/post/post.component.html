@@ -1,0 +1,41 @@
+
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="userId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong>User ID</strong> </th>
+            <td mat-cell *matCellDef="let row"> {{row.userId}} </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong>Title</strong> </th>
+            <td mat-cell *matCellDef="let row"> {{row.title | uppercase}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="body">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><strong> Body</strong> </th>
+            <td mat-cell *matCellDef="let row" matTooltip={{row.body}}> {{row.body |
+                truncate:[15,'...']}} </td>
+        </ng-container>
+
+        <!-- Fruit Column -->
+        <!-- <ng-container matColumnDef="fruit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fruit </th>
+        <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
+      </ng-container> -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter </td>
+        </tr>
+    </table>
+
+    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+    <app-pagination [offset]="offset" [limit]="limit" [size]="count" (changePage)="receivedPage($event)"></app-pagination>
+</div>
